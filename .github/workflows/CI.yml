@@ -1,4 +1,4 @@
-name: Build and Verify CyberBot
+name:  CyberBot
 
 on:
   push:
