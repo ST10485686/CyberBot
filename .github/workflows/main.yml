@@ -1,138 +1,49 @@
-name: CI
+name: Build and Verify CyberBot
 
 on:
   push:
-    branches: [ "master", "main" ]
+    branches: [ master, main ]
   pull_request:
-    branches: [ "master", "main" ]
+    branches: [ master, main ]
 
 jobs:
   build:
     runs-on: windows-latest
-    permissions:
-      contents: read
-
+    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Cache NuGet packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.nuget/packages
-          key: nuget-packages-${{ runner.os }}-${{ hashFiles('**/project.assets.json') }}
-          restore-keys: |
-            nuget-packages-${{ runner.os }}-
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.0.x'
-
-      - name: Restore
-        run: dotnet restore
-
-      - name: Build
-        run: dotnet build --no-restore --configuration Release
-
-      - name: Run (optional smoke run)
-        if: ${{ github.event_name == 'push' }}
-        run: |
-          echo "Running a short build verification..."
-          dotnet build --no-restore --configuration Release
-
-      - name: Upload build logs
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-logs
-          path: '**/bin/**/Release/*.log'
-
-  git_config:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Git configuration
-        run: |
-          git config user.name "Your Name"
-          git config user.email "you@example.com"
-
-      - name: Commit and push changes
-        run: |
-          git add .
-          git commit -m "Initial commit: Set up project structure and main files" || echo "No changes to commit"
-          git push origin master || echo "Nothing to push"
-
-  greeting:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Add voice greeting
-        run: |
-          git add greeting.wav
-          git commit -m "feat: Add voice greeting functionality with WAV file" || echo "No changes to commit"
-          git push origin master || echo "Nothing to push"
-
-  ascii_art:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Add ASCII art and UI formatting
-        run: |
-          git add CyberBot/classes/UIManager.cs
-          git commit -m "feat: Add ASCII art cybersecurity logo and UI formatting" || echo "No changes to commit"
-          git push origin master || echo "Nothing to push"
-
-  response_system:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Implement response system
-        run: |
-          git add CyberBot/classes/ResponseManager.cs CyberBot/classes/Chatbot.cs
-          git commit -m "feat: Implement basic cybersecurity responses for password, phishing, browsing" || echo "No changes to commit"
-          git push origin master || echo "Nothing to push"
-
-  typing_effect:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Add typing effect and validation
-        run: |
-          git add CyberBot/classes/UIManager.cs CyberBot/classes/Chatbot.cs
-          git commit -m "feat: Add typing animation effect and input validation" || echo "No changes to commit"
-          git push origin master || echo "Nothing to push"
-
-  ci_setup:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up CI configuration
-        run: |
-          git add .github/workflows/ci.yml README.md
-          git commit -m "ci: Set up GitHub Actions workflow for automated builds" || echo "No changes to commit"
-          git push origin master || echo "Nothing to push"
-
-  final_polish:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Final polish
-        run: |
-          git add .
-          git commit -m "docs: Update README with setup instructions and CI badge" || echo "No changes to commit"
-          git push origin master || echo "Nothing to push"
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Build project
+      run: dotnet build --configuration Release --no-restore
+    
+    - name: Verify source files exist
+      run: |
+        $files = @("Program.cs", "Chatbot.cs", "ResponseManager.cs", "UIManager.cs")
+        foreach ($file in $files) {
+          if (Test-Path $file) {
+            Write-Host "Found: $file"
+          } else {
+            Write-Host "Missing: $file"
+            exit 1
+          }
+        }
+    
+    - name: Check for audio file
+      run: |
+        if (Test-Path "greeting.wav") {
+          Write-Host "greeting.wav found"
+        } else {
+          Write-Host "greeting.wav not found (optional)"
+        }
+    
+    - name: Build successful
+      run: Write-Host "Build completed successfully!"
