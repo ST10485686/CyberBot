@@ -46,7 +46,6 @@ If missing, the chatbot runs without voice greeting.
 
 
 ## GitHub Actions CI
-![CI Workflow](screenshots/ci-workflow.png)  
 *The workflow builds the project on every push to ensure code compiles correctly.*
 
 ## Commit History
@@ -57,8 +56,8 @@ If missing, the chatbot runs without voice greeting.
 - Commit 5: Add typing effect and input validation
 - Commit 6: Set up GitHub Actions CI workflow
 
-## Video Presentation
-[YouTube Link - Unlisted]
+## Video Presentation (unlisted video)
+[Watch on Youtube](https://youtu.be/4x3xjmBaHbA)
 
 ## Author
 -Iviwe Bakaqana  
