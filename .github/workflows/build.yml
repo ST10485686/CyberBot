@@ -1,4 +1,4 @@
-name:  CyberBot
+name: Build CyberBot
 
 on:
   push:
@@ -11,7 +11,8 @@ jobs:
     runs-on: windows-latest
     
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
     
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -19,7 +20,7 @@ jobs:
         dotnet-version: 8.0.x
     
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore CyberBot/CyberBot.csproj
     
     - name: Build project
-      run: dotnet build --configuration Release
+      run: dotnet build CyberBot/CyberBot.csproj --configuration Release --no-restore
