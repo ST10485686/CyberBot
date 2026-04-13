@@ -1,4 +1,4 @@
-# CybersecurityBot
+# CyberBot
 
 ## Overview 
 A console-based cybersecurity chatbot that educates user about online safety measures through interactive conversation, voice greeting, and visual enhancements.
