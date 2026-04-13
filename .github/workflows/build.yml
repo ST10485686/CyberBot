@@ -1,0 +1,49 @@
+name: Build and Verify CyberBot
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Build project
+      run: dotnet build --configuration Release --no-restore
+    
+    - name: Verify source files exist
+      run: |
+        $files = @("Program.cs", "Chatbot.cs", "ResponseManager.cs", "UIManager.cs")
+        foreach ($file in $files) {
+          if (Test-Path $file) {
+            Write-Host "Found: $file"
+          } else {
+            Write-Host "Missing: $file"
+            exit 1
+          }
+        }
+    
+    - name: Check for audio file
+      run: |
+        if (Test-Path "greeting.wav") {
+          Write-Host "greeting.wav found"
+        } else {
+          Write-Host "greeting.wav not found (optional)"
+        }
+    
+    - name: Build successful
+      run: Write-Host "Build completed successfully!"
