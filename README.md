@@ -12,20 +12,6 @@ The CyberBot is a WPF-based desktop application that educates users about online
 
 ---
 
-## Table of Contents
-
-1. [Features](#features)
-2. [Technologies Used](#technologies-used)
-3. [Setup Instructions](#setup-instructions)
-4. [How to Use](#how-to-use)
-5. [Project Structure](#project-structure)
-6. [Part 2 Requirements Checklist](#part-2-requirements-checklist)
-7. [CI/CD Status](#cicd-status)
-8. [Commit History](#commit-history)
-9. [Video Presentation](#video-presentation)
-10. [Author Information](#author-information)
-
----
 
 ## Features
 
