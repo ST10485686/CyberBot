@@ -1,65 +1,93 @@
-# CyberBot
+# CyberBot - Part 2
 
-## Overview 
-A console-based cybersecurity chatbot that educates user about online safety measures through interactive conversation, voice greeting, and visual enhancements.
+## Overview
 
- ## Features 
- -**Voice Greeting**: Plays a welcome message when the application starts
- - **ASCII Art**: Displays a cybersecurity- themed logo
- - **Interactive Chat**: Responds to questions about passwords, phishing, and safe browsing
- - **Typing Effect**: Simualtes natural conversation
- - **Colored Console UI** : Visual borders, dividers, and color coded messages
- - **Input Validation** Handles empty inputs and unrecongnized queries
-
-   ## Technologies Used
-   - C# .NET 8.0
-   - System.Media (voice play back)
-   - Github Actions (CI/ CD)
-  
-     ## Setup Instructions
-     
-    ### Requirements
-     -Windows OS (For System.Media compatibality)
-     -.NET 8.0 SDK
-     - Visual Studio 2022
-
- ### Running the Application
-    1. Clone the repository
-    2. Open the solution in Visual Studio
-    3. Ensure `greeting.wav` is in the output directory
-    4. Press F5 to run
-
-## Audio File Setup
-The application looks for `greeting.wav` in the same folder as the executable. 
-If missing, the chatbot runs without voice greeting.
-   
-## Usage
-- Run the application and follow console prompts.
-- Enter your name when prompted; ask about `password`, `phishing`, or `browsing` to get topic-specific advice.
-- Type `help` to see available options and `exit` to quit.
-
-## Project Structure
-- `CyberBot/classes` — core classes such as `Chatbot`, `ResponseManager`, and `UIManager`  
-- `CyberBot/Audio` — audio player interfaces and wrappers (`IAudioPlayer`, `SoundPlayerWrapper`)  
-- `CyberBot/Program.cs` — application entry point  
-- `screenshots` — images used by this README (`ci-workflow.png`)
-
-
-## GitHub Actions CI
-*The workflow builds the project on every push to ensure code compiles correctly.*
-
-## Commit History
-- Commit 1: Initial project setup
-- Commit 2: Add voice greeting functionality
-- Commit 3: Add ASCII art and UI formatting
-- Commit 4: Implement response manager for cybersecurity topics
-- Commit 5: Add typing effect and input validation
-- Commit 6: Set up GitHub Actions CI workflow
-
-## Video Presentation (unlisted video)
-[Watch on Youtube](https://youtu.be/4x3xjmBaHbA)
+The CyberBot is a WPF-based desktop application that educates users about online safety through interactive conversation. Part 2 expands the console-based chatbot with a modern graphical user interface (GUI), sentiment detection, memory features, and dynamic responses.
 
 ## Author
--Iviwe Bakaqana  
--ST10485686
 
+- **Name:** Iviwe Bakaqana
+- **Student Number:** ST10485686
+- **Repository:** https://github.com/ST10485686/CyberBot
+
+---
+
+## Table of Contents
+
+1. [Features](#features)
+2. [Technologies Used](#technologies-used)
+3. [Setup Instructions](#setup-instructions)
+4. [How to Use](#how-to-use)
+5. [Project Structure](#project-structure)
+6. [Part 2 Requirements Checklist](#part-2-requirements-checklist)
+7. [CI/CD Status](#cicd-status)
+8. [Commit History](#commit-history)
+9. [Video Presentation](#video-presentation)
+10. [Author Information](#author-information)
+
+---
+
+## Features
+
+### Core Features
+
+| Feature | Description |
+|---------|-------------|
+| **GUI Interface** | Modern WPF window with buttons, chat display, and sentiment indicator |
+| **Keyword Detection** | Recognizes cybersecurity keywords: password, scam, privacy |
+| **Random Responses** | Multiple predefined responses, randomly selected for variety |
+| **Memory and Recall** | Stores user name and favorite topic for personalized conversation |
+| **Sentiment Detection** | Detects worried, curious, and frustrated sentiments |
+| **Error Handling** | Graceful handling of unrecognized inputs with default responses |
+| **Voice Greeting** | Plays welcome audio when application starts |
+| **Code Optimization** | Uses dictionaries, lists, and proper OOP practices |
+
+### Keyword Topics
+
+| Keyword | Response Category |
+|---------|-------------------|
+| password | Password safety tips, strong password advice, 2FA recommendations |
+| scam | Scam detection, phishing warnings, suspicious link advice |
+| privacy | Privacy settings, VPN usage, data protection tips |
+| phishing | Phishing attack explanation, URL verification |
+| browsing | Safe browsing habits, HTTPS, public Wi-Fi warnings |
+
+### Sentiment Detection
+
+| Sentiment | Trigger Words | Bot Response |
+|-----------|---------------|--------------|
+| Worried | worried, scared, nervous, anxious, concerned | Empathetic reassurance with safety tips |
+| Curious | curious, interested, wonder, tell me, explain | Encouraging with detailed explanations |
+| Frustrated | frustrated, confused, annoyed, difficult, hard | Simplifying and offering step-by-step help |
+| Neutral | (default) | Standard informative responses |
+
+---
+
+## Technologies Used
+
+- **.NET 8.0** - Framework
+- **WPF (Windows Presentation Foundation)** - GUI framework
+- **C#** - Programming language
+- **XAML** - UI markup language
+- **System.Media** - Audio playback for voice greeting
+- **GitHub Actions** - Continuous Integration
+- **Git** - Version control
+
+---
+
+## Setup Instructions
+
+### Prerequisites
+
+- Windows OS (for audio and WPF compatibility)
+- .NET 8.0 SDK or later
+- Visual Studio 2022 (recommended)
+- Git (optional, for cloning)
+
+### Installation Steps
+
+**Step 1: Clone the repository**
+
+```bash
+git clone https://github.com/ST10485686/CyberBot.git
+cd CyberBot
