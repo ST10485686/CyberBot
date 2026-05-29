@@ -1,0 +1,234 @@
+﻿<Window x:Class="CyberBotGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Cybersecurity Awareness Bot" 
+        Height="750" Width="850"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#2D2D2D" CornerRadius="10" Margin="0,0,0,10" Padding="10">
+            <StackPanel>
+                <TextBlock Text="CYBERSECURITY AWARENESS BOT" 
+                           FontSize="24" FontWeight="Bold" 
+                           Foreground="#4CAF50" 
+                           HorizontalAlignment="Center"/>
+                <TextBlock Text="Your Personal Online Safety Guard" 
+                           FontSize="14" 
+                           Foreground="#888888" 
+                           HorizontalAlignment="Center"/>
+                <TextBlock Text="Part 2: GUI Interface with Sentiment Detection and Memory" 
+                           FontSize="11" 
+                           Foreground="#666666" 
+                           HorizontalAlignment="Center"
+                           Margin="0,5,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Memory Status Bar -->
+        <Border Grid.Row="1" Background="#252526" CornerRadius="8" Margin="0,0,0,10" Padding="8">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Memory: " Foreground="#888888"/>
+                <TextBlock x:Name="MemoryStatus" Text="No user data stored" 
+                           Foreground="#FFA500" FontSize="11" FontWeight="Bold"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Chat Display Area -->
+        <ListBox x:Name="ChatDisplay" 
+                 Grid.Row="2" 
+                 Background="#252526" 
+                 BorderBrush="#3E3E42" 
+                 BorderThickness="1"
+                 FontFamily="Segoe UI" 
+                 FontSize="13"
+                 Margin="0,0,0,10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="5" Padding="10" CornerRadius="8" Background="{Binding Background}">
+                        <TextBlock Text="{Binding Message}" 
+                                   Foreground="{Binding Foreground}" 
+                                   TextWrapping="Wrap"/>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- Keyword Buttons Row 1 -->
+        <Border Grid.Row="3" 
+                Background="#2D2D2D" 
+                CornerRadius="10" 
+                Margin="0,0,0,8" 
+                Padding="8">
+            <WrapPanel>
+                <Button x:Name="BtnPassword" 
+                        Content="Password Safety" 
+                        Width="120" 
+                        Height="35"
+                        Margin="0,0,8,0"
+                        Background="#4CAF50" 
+                        Foreground="White"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Cursor="Hand"
+                        Click="SuggestionButton_Click"/>
+                <Button x:Name="BtnScam" 
+                        Content="Scam Detection" 
+                        Width="120" 
+                        Height="35"
+                        Margin="0,0,8,0"
+                        Background="#4CAF50" 
+                        Foreground="White"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Cursor="Hand"
+                        Click="SuggestionButton_Click"/>
+                <Button x:Name="BtnPrivacy" 
+                        Content="Privacy Tips" 
+                        Width="110" 
+                        Height="35"
+                        Margin="0,0,8,0"
+                        Background="#4CAF50" 
+                        Foreground="White"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Cursor="Hand"
+                        Click="SuggestionButton_Click"/>
+                <Button x:Name="BtnPhishing" 
+                        Content="Phishing" 
+                        Width="100" 
+                        Height="35"
+                        Margin="0,0,8,0"
+                        Background="#4CAF50" 
+                        Foreground="White"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Cursor="Hand"
+                        Click="SuggestionButton_Click"/>
+            </WrapPanel>
+        </Border>
+
+        <!-- Keyword Buttons Row 2 (with Exit button) -->
+        <Border Grid.Row="4" 
+                Background="#2D2D2D" 
+                CornerRadius="10" 
+                Margin="0,0,0,8" 
+                Padding="8">
+            <WrapPanel>
+                <Button x:Name="BtnBrowsing" 
+                        Content="Safe Browsing" 
+                        Width="120" 
+                        Height="35"
+                        Margin="0,0,8,0"
+                        Background="#4CAF50" 
+                        Foreground="White"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Cursor="Hand"
+                        Click="SuggestionButton_Click"/>
+                <Button x:Name="BtnHelp" 
+                        Content="Help" 
+                        Width="80" 
+                        Height="35"
+                        Margin="0,0,8,0"
+                        Background="#FFA500" 
+                        Foreground="White"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Cursor="Hand"
+                        Click="SuggestionButton_Click"/>
+                <Button x:Name="BtnClear" 
+                        Content="Clear Chat" 
+                        Width="100" 
+                        Height="35"
+                        Margin="0,0,8,0"
+                        Background="#666666" 
+                        Foreground="White"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Cursor="Hand"
+                        Click="BtnClear_Click"/>
+                <Button x:Name="BtnMemory" 
+                        Content="Show Memory" 
+                        Width="110" 
+                        Height="35"
+                        Margin="0,0,8,0"
+                        Background="#2196F3" 
+                        Foreground="White"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Cursor="Hand"
+                        Click="BtnMemory_Click"/>
+                <Button x:Name="BtnExit" 
+                        Content="EXIT" 
+                        Width="80" 
+                        Height="35"
+                        Margin="0,0,8,0"
+                        Background="#DC3545" 
+                        Foreground="White"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Cursor="Hand"
+                        Click="BtnExit_Click"/>
+            </WrapPanel>
+        </Border>
+
+        <!-- Sentiment Indicator -->
+        <Border Grid.Row="5" 
+                Background="#2D2D2D" 
+                CornerRadius="10" 
+                Margin="0,0,0,10" 
+                Padding="8">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Sentiment Detection: " Foreground="#888888"/>
+                <TextBlock x:Name="SentimentIndicator" 
+                           Text="NEUTRAL" 
+                           Foreground="#FFA500"
+                           FontWeight="Bold"/>
+                <TextBlock Text=" | Detects: worried, curious, frustrated" Foreground="#666666" Margin="20,0,0,0" FontSize="10"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Input Area -->
+        <Grid Grid.Row="6" Margin="0,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="UserInput" 
+                     Grid.Column="0"
+                     Background="#2D2D2D" 
+                     Foreground="White" 
+                     BorderBrush="#3E3E42" 
+                     BorderThickness="1"
+                     FontSize="14"
+                     Padding="10"
+                     KeyDown="UserInput_KeyDown"/>
+
+            <Button x:Name="SendButton" 
+                    Grid.Column="1"
+                    Content="Send" 
+                    Width="80" 
+                    Height="40"
+                    Margin="10,0,0,0"
+                    Background="#4CAF50" 
+                    Foreground="White"
+                    FontSize="14" 
+                    FontWeight="Bold"
+                    Cursor="Hand"
+                    Click="SendButton_Click"/>
+        </Grid>
+    </Grid>
+</Window>
